@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fortune Tables</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="landing">
+    <div class="crown">♛</div>
+    <h1>FORTUNE</h1>
+    <h2>TABLES</h2>
+    <p class="tagline">RISK IT. PLAY IT. TAKE YOUR SEAT.</p>
+    <section class="panel">
+      <h3>FORTUNE TAP</h3>
+      <p>Physical board. Digital bank. Your way.</p>
+      <button id="createGame">CREATE GAME</button>
+      <button id="showJoin" class="secondary">JOIN GAME</button>
+      <div id="joinBox" class="hidden">
+        <input id="tableCode" placeholder="TABLE CODE" maxlength="12">
+        <input id="playerName" placeholder="PLAYER NAME" maxlength="40">
+        <select id="symbol">
+          <option value="Crown">CROWN — POWER</option>
+          <option value="Lips">LIPS — PLEASURE</option>
+          <option value="Diamond">DIAMOND — WEALTH</option>
+          <option value="Snake">SNAKE — CHAOS</option>
+        </select>
+        <button id="joinGame">TAKE YOUR SEAT</button>
+      </div>
+      <p id="message"></p>
+    </section>
+    <p class="footer">PLAY CLASSIC OR CONNECTED.</p>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>
