@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fortune Tables</title>
   <link rel="stylesheet" href="style.css">
+  <style>.play-anywhere{margin:14px 0;padding:18px;border:1px solid #ff2d7a;background:radial-gradient(circle at 50% 0,#4c102f,#090909 60%);box-shadow:0 0 25px #ff2d7a33}.play-anywhere h3{color:#d4af37;font-size:24px;margin:0 0 6px}.play-anywhere button{font-size:18px;min-height:54px}</style>
 </head>
 <body>
   <main class="landing">
@@ -13,8 +14,13 @@
     <h2>TABLES</h2>
     <p class="tagline">RISK IT. PLAY IT. TAKE YOUR SEAT.</p>
     <section class="panel">
+      <div class="play-anywhere">
+        <h3>🎲 PLAY ANYWHERE</h3>
+        <p>Use the live digital board with friends on phones, tablets, or computers.</p>
+        <button id="openBoard">OPEN DIGITAL BOARD</button>
+      </div>
       <h3>FORTUNE TAP</h3>
-      <p>Physical board. Digital bank. Your way.</p>
+      <p>Create a game or join with a table code.</p>
       <button id="createGame">CREATE GAME</button>
       <button id="showJoin" class="secondary">JOIN GAME</button>
       <div id="joinBox" class="hidden">
@@ -30,9 +36,10 @@
       </div>
       <p id="message"></p>
     </section>
-    <p class="footer">PLAY CLASSIC OR CONNECTED.</p>
+    <p class="footer">PHYSICAL OR DIGITAL. PLAY FROM ANYWHERE.</p>
   </main>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="app.js"></script>
+  <script>document.getElementById('openBoard').onclick=()=>{if(localStorage.getItem('ft_player_token')||localStorage.getItem('ft_banker_token'))location.href='board.html';else{document.getElementById('joinBox').classList.remove('hidden');document.getElementById('message').textContent='CREATE OR JOIN A GAME FIRST, THEN THE LIVE BOARD OPENS FOR EVERYONE.';}}</script>
 </body>
 </html>
