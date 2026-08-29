@@ -21,6 +21,8 @@
   `;
   document.head.appendChild(style);
   document.body.classList.add('ft-banker-shell');
+  const startInput=$('#startingCash');
+  if(startInput && startInput.value==='10') startInput.value='50';
 
   function markSection(headingText,id){
     const el=$$('h2,h3').find(h=>h.textContent.toUpperCase().includes(headingText));
