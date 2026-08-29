@@ -17,7 +17,7 @@
     .banker-menu a{display:flex;gap:9px;align-items:center;color:#eee;text-decoration:none;padding:11px 12px;border-radius:8px;border:1px solid transparent;margin:3px 0;font-size:13px}.banker-menu a:hover,.banker-menu a.active{background:#281018;border-color:#ff2d7a;color:#fff}.banker-menu .goldlink{color:#d4af37;border-color:#d4af3733}.banker-menu .pinklink{color:#ff2d7a;border-color:#ff2d7a33}.banker-menu .purplelink{color:#b896ff;border-color:#8d55ff55}.banker-menu .dangerlink{color:#ff809f;border-color:#7b102e55;background:#16060c}
     .banker-side .session{margin-top:14px;padding-top:12px;border-top:1px solid #32280f}.banker-side button{font-size:11px;padding:10px;margin:5px 0}
     .banker-mobile-head{display:none}.banker-anchor{scroll-margin-top:18px}
-    .approval-panel{border-top:1px solid #59491e;margin-top:22px;padding-top:18px}.approval-panel h3{color:#d4af37}.approval-list{display:grid;gap:10px}.approval-card{border:1px solid #d4af37;background:linear-gradient(145deg,#120d03,#070707);padding:14px;border-radius:10px}.approval-card .requester{color:#ff2d7a;font-weight:800}.approval-card .price{color:#d4af37;font-family:Georgia,serif;font-size:20px}.approval-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.approval-actions .approve{background:#1f6f3e;border-color:#46c978;color:#fff}.approval-actions .decline{background:#7b102e;border-color:#ff2d7a;color:#fff}.approval-empty{border:1px dashed #59491e;padding:14px;color:#aaa;border-radius:8px}
+    .approval-panel,.repo-panel{border-top:1px solid #59491e;margin-top:22px;padding-top:18px}.approval-panel h3,.repo-panel h3{color:#d4af37}.approval-list,.repo-list{display:grid;gap:10px}.approval-card,.repo-card{border:1px solid #d4af37;background:linear-gradient(145deg,#120d03,#070707);padding:14px;border-radius:10px}.approval-card .requester,.repo-card .requester{color:#ff2d7a;font-weight:800}.approval-card .price,.repo-card .price{color:#d4af37;font-family:Georgia,serif;font-size:20px}.approval-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.approval-actions .approve{background:#1f6f3e;border-color:#46c978;color:#fff}.approval-actions .decline{background:#7b102e;border-color:#ff2d7a;color:#fff}.approval-empty,.repo-empty{border:1px dashed #59491e;padding:14px;color:#aaa;border-radius:8px}.repo-card{border-color:#ff2d7a;background:linear-gradient(145deg,#1b070d,#070707)}.repo-badge{display:inline-block;border:1px solid #ff2d7a;color:#ff7ca9;background:#230811;padding:5px 8px;border-radius:999px;font-size:10px;letter-spacing:1px;font-weight:800}.repo-btn{background:linear-gradient(135deg,#7b102e,#ba1748);border-color:#ff2d7a;color:#fff;margin-top:10px}
     @media(max-width:820px){.ft-banker-shell .landing{padding-left:0;padding-top:70px}.banker-side{transform:translateX(-105%);transition:.2s;width:270px}.banker-side.open{transform:translateX(0)}.banker-mobile-head{display:flex;position:fixed;z-index:480;left:0;right:0;top:0;height:62px;background:#050505eF;border-bottom:1px solid #59491e;align-items:center;justify-content:space-between;padding:8px 12px}.banker-mobile-head b{font-family:Georgia,serif;color:#d4af37}.banker-mobile-head button{width:auto;padding:9px 12px;margin:0}.ft-banker-shell .panel.wide{width:calc(100% - 20px);margin:10px auto}.banker-side:after{content:'';position:fixed;left:270px;top:0;bottom:0;width:100vw;background:#0009;pointer-events:none}.banker-side:not(.open):after{display:none}}
   `;
   document.head.appendChild(style);
@@ -49,6 +49,12 @@
   if(playerHeading) playerHeading.before(approvalSection);
   else $('.panel.wide')?.appendChild(approvalSection);
 
+  const repoSection=document.createElement('div');
+  repoSection.className='repo-panel banker-anchor';
+  repoSection.id='bank-stolen-repo';
+  repoSection.innerHTML=`<h3>🏦 STOLEN PROPERTY REPOSSESSION</h3><p><small>Properties a thief successfully escaped with stay flagged as stolen while that thief still owns them. The Bank can repossess any flagged property and return it to Bank ownership.</small></p><div id="stolenRepoList" class="repo-list"><div class="repo-empty">No stolen properties eligible for repossession.</div></div>`;
+  approvalSection.after(repoSection);
+
   const side=document.createElement('aside');
   side.className='banker-side';
   side.innerHTML=`
@@ -63,6 +69,7 @@
       <a class="active" href="#bank-players">▦ <span>DASHBOARD / PLAYERS</span></a>
       <a class="pinklink" href="#bank-digital">💳 <span>DIGITAL BANK</span></a>
       <a class="goldlink" href="#bank-home-approvals">🏠 <span>HOME APPROVALS</span></a>
+      <a class="dangerlink" href="#bank-stolen-repo">🏦 <span>REPO STOLEN PROPERTY</span></a>
       <a href="properties.html">🏛 <span>PROPERTY CONTROL</span></a>
       <a class="dangerlink" href="theft.html">🚨 <span>CATCH PROPERTY THIEVES</span></a>
       <a class="purplelink" href="market-crash.html">📉 <span>MARKET CRASH DECK</span></a>
@@ -84,7 +91,7 @@
 
   const mobile=document.createElement('div');
   mobile.className='banker-mobile-head';
-  mobile.innerHTML=`<button id="bankMenuBtn">☰</button><b>♛ BANKER • ${tableCode}</b><button onclick="location.href='#bank-home-approvals'">🏠</button>`;
+  mobile.innerHTML=`<button id="bankMenuBtn">☰</button><b>♛ BANKER • ${tableCode}</b><button onclick="location.href='#bank-stolen-repo'">🏦</button>`;
   document.body.prepend(mobile);
 
   $('#bankMenuBtn')?.addEventListener('click',()=>side.classList.toggle('open'));
@@ -111,6 +118,23 @@
     if(!error){await loadHomeApprovals(); if(typeof load==='function')load();}
   }
 
+  async function loadStolenRepos(){
+    const list=$('#stolenRepoList');
+    if(!list || typeof db==='undefined' || typeof token==='undefined')return;
+    const {data,error}=await db.rpc('ft_get_banker_stolen_properties',{p_banker_token:token});
+    if(error){list.innerHTML=`<div class="repo-empty">${esc(error.message)}</div>`;return}
+    const rows=data||[];
+    list.innerHTML=rows.length?rows.map(r=>`<article class="repo-card"><span class="repo-badge">STOLEN / ESCAPED</span><div class="requester" style="margin-top:8px">HELD BY ${esc(r.thief_name)}</div><h4 style="margin:5px 0">${esc(r.property_name)}</h4><div class="price">VALUE ${r.price} TABLES</div><div><small>${esc(r.category||'PROPERTY')} • RENT ${r.rent} TABLES • ESCAPED ${r.escaped_at?new Date(r.escaped_at).toLocaleString():'RECENTLY'}</small></div><button class="repo-btn" data-theft="${r.theft_id}" data-name="${esc(r.property_name)}" data-player="${esc(r.thief_name)}">🏦 REPOSSESS TO BANK</button></article>`).join(''):'<div class="repo-empty">No stolen properties eligible for repossession.</div>';
+    $$('.repo-btn',list).forEach(b=>b.addEventListener('click',()=>repossessStolen(Number(b.dataset.theft),b.dataset.name,b.dataset.player)));
+  }
+  async function repossessStolen(theftId,propertyName,playerName){
+    if(!confirm(`REPOSSESS ${propertyName} from ${playerName}?\n\nThe property will return to Bank ownership immediately.`))return;
+    const {data,error}=await db.rpc('ft_banker_repossess_stolen_property',{p_banker_token:token,p_theft_id:theftId});
+    const messageEl=$('#message');
+    if(messageEl)messageEl.textContent=error?error.message:(data||`🏦 ${propertyName} repossessed to the Bank.`);
+    if(!error){await loadStolenRepos();if(typeof load==='function')load();}
+  }
+
   function syncProfile(){
     const count=(window.players&&Array.isArray(window.players))?window.players.length:$$('#players .player-card').length;
     const el=$('#sidePlayerCount'); if(el)el.textContent=`${count} / 6 PLAYERS`;
@@ -120,5 +144,6 @@
   }
   setInterval(syncProfile,1000); syncProfile();
   setInterval(loadHomeApprovals,2500); loadHomeApprovals();
+  setInterval(loadStolenRepos,2000); loadStolenRepos();
   addEventListener('hashchange',syncProfile);
 })();
