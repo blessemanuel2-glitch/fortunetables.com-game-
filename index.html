@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fortune Tables</title>
   <link rel="stylesheet" href="style.css">
-  <style>.play-anywhere{margin:14px 0;padding:18px;border:1px solid #ff2d7a;background:radial-gradient(circle at 50% 0,#4c102f,#090909 60%);box-shadow:0 0 25px #ff2d7a33}.play-anywhere h3{color:#d4af37;font-size:24px;margin:0 0 6px}.play-anywhere button{font-size:18px;min-height:54px}</style>
+  <style>.homepanel{width:min(520px,100%)}.session{display:none;margin-bottom:14px;padding:16px;border:1px solid #d4af37;background:#0d0903;border-radius:10px}.session strong{color:#d4af37}.choice{display:grid;grid-template-columns:1fr 1fr;gap:10px}.divider{display:flex;align-items:center;gap:10px;color:#8e7a48;font-size:11px;letter-spacing:2px;margin:18px 0}.divider:before,.divider:after{content:"";height:1px;background:#4c3c15;flex:1}.digital{margin:14px 0;padding:18px;border:1px solid #ff2d7a;background:radial-gradient(circle at 50% 0,#4c102f,#090909 60%);border-radius:12px}.digital h3{color:#d4af37;font-size:23px;margin:0 0 6px}@media(max-width:520px){.choice{grid-template-columns:1fr}}</style>
 </head>
 <body>
   <main class="landing">
@@ -13,33 +13,30 @@
     <h1>FORTUNE</h1>
     <h2>TABLES</h2>
     <p class="tagline">RISK IT. PLAY IT. TAKE YOUR SEAT.</p>
-    <section class="panel">
-      <div class="play-anywhere">
-        <h3>🎲 PLAY ANYWHERE</h3>
-        <p>Use the live digital board with friends on phones, tablets, or computers.</p>
-        <button id="openBoard">OPEN DIGITAL BOARD</button>
-      </div>
-      <h3>FORTUNE TAP</h3>
-      <p>Create a game or join with a table code.</p>
-      <button id="createGame">CREATE GAME</button>
-      <button id="showJoin" class="secondary">JOIN GAME</button>
+    <section class="panel homepanel">
+      <div id="resumeBox" class="session"><strong>ACTIVE GAME FOUND</strong><p id="resumeText">You already have a Fortune Tables session on this device.</p><button id="resumeGame">RETURN TO GAME</button></div>
+      <div class="digital"><h3>💳 PHYSICAL MONEY IS OPTIONAL</h3><p>The Banker can run every TABLE digitally on the Fortune website, including starting balances, payments, auctions, rent, and rewards.</p></div>
+      <h3>ENTER THE TABLE</h3>
+      <p>One person creates the game as Banker. Everyone else joins with the table code.</p>
+      <div class="choice"><button id="createGame">♛ CREATE AS BANKER</button><button id="showJoin" class="secondary">JOIN AS PLAYER</button></div>
       <div id="joinBox" class="hidden">
-        <input id="tableCode" placeholder="TABLE CODE" maxlength="12">
-        <input id="playerName" placeholder="PLAYER NAME" maxlength="40">
+        <div class="divider">PLAYER ENTRY</div>
+        <input id="tableCode" placeholder="TABLE CODE" maxlength="12" autocomplete="off">
+        <input id="playerName" placeholder="PLAYER NAME" maxlength="40" autocomplete="name">
         <select id="symbol">
-          <option value="Crown">CROWN — POWER</option>
-          <option value="Lips">LIPS — PLEASURE</option>
-          <option value="Diamond">DIAMOND — WEALTH</option>
-          <option value="Snake">SNAKE — CHAOS</option>
+          <option value="Crown">♛ CROWN — POWER</option>
+          <option value="Lips">💋 LIPS — PLEASURE</option>
+          <option value="Diamond">💎 DIAMOND — WEALTH</option>
+          <option value="Snake">🐍 SNAKE — CHAOS</option>
         </select>
         <button id="joinGame">TAKE YOUR SEAT</button>
       </div>
+      <button id="openBoard" class="secondary">🎲 OPEN DIGITAL BOARD</button>
       <p id="message"></p>
     </section>
-    <p class="footer">PHYSICAL OR DIGITAL. PLAY FROM ANYWHERE.</p>
+    <p class="footer">FORTUNE FAVORS THE BOLD.</p>
   </main>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="app.js"></script>
-  <script>document.getElementById('openBoard').onclick=()=>{if(localStorage.getItem('ft_player_token')||localStorage.getItem('ft_banker_token'))location.href='board.html';else{document.getElementById('joinBox').classList.remove('hidden');document.getElementById('message').textContent='CREATE OR JOIN A GAME FIRST, THEN THE LIVE BOARD OPENS FOR EVERYONE.';}}</script>
 </body>
 </html>
