@@ -14,7 +14,7 @@
     .banker-profile{margin:18px 0 15px;padding:16px 12px;border:1px solid #ff2d7a;background:radial-gradient(circle at 50% 0,#3a0d23,#080808 65%);border-radius:12px;text-align:center;box-shadow:0 0 20px #ff2d7a22}
     .banker-avatar{width:68px;height:68px;margin:0 auto 8px;border-radius:50%;display:grid;place-items:center;border:2px solid #d4af37;font-size:35px;color:#d4af37;background:#090909;box-shadow:0 0 22px #d4af3733}
     .banker-role{color:#ff2d7a;font-size:11px;letter-spacing:2px;font-weight:800}.banker-name{font-family:Georgia,serif;font-size:20px;margin:3px 0}.banker-meta{font-size:11px;color:#cdbf9b;line-height:1.6}.banker-count{color:#d4af37;font-weight:800}
-    .banker-menu a{display:flex;gap:9px;align-items:center;color:#eee;text-decoration:none;padding:11px 12px;border-radius:8px;border:1px solid transparent;margin:3px 0;font-size:13px}.banker-menu a:hover,.banker-menu a.active{background:#281018;border-color:#ff2d7a;color:#fff}.banker-menu .goldlink{color:#d4af37;border-color:#d4af3733}.banker-menu .pinklink{color:#ff2d7a;border-color:#ff2d7a33}.banker-menu .dangerlink{color:#ff809f;border-color:#7b102e55}
+    .banker-menu a{display:flex;gap:9px;align-items:center;color:#eee;text-decoration:none;padding:11px 12px;border-radius:8px;border:1px solid transparent;margin:3px 0;font-size:13px}.banker-menu a:hover,.banker-menu a.active{background:#281018;border-color:#ff2d7a;color:#fff}.banker-menu .goldlink{color:#d4af37;border-color:#d4af3733}.banker-menu .pinklink{color:#ff2d7a;border-color:#ff2d7a33}.banker-menu .dangerlink{color:#ff809f;border-color:#7b102e55;background:#16060c}
     .banker-side .session{margin-top:14px;padding-top:12px;border-top:1px solid #32280f}.banker-side button{font-size:11px;padding:10px;margin:5px 0}
     .banker-mobile-head{display:none}.banker-anchor{scroll-margin-top:18px}
     @media(max-width:820px){.ft-banker-shell .landing{padding-left:0;padding-top:70px}.banker-side{transform:translateX(-105%);transition:.2s;width:270px}.banker-side.open{transform:translateX(0)}.banker-mobile-head{display:flex;position:fixed;z-index:480;left:0;right:0;top:0;height:62px;background:#050505eF;border-bottom:1px solid #59491e;align-items:center;justify-content:space-between;padding:8px 12px}.banker-mobile-head b{font-family:Georgia,serif;color:#d4af37}.banker-mobile-head button{width:auto;padding:9px 12px;margin:0}.ft-banker-shell .panel.wide{width:calc(100% - 20px);margin:10px auto}.banker-side:after{content:'';position:fixed;left:270px;top:0;bottom:0;width:100vw;background:#0009;pointer-events:none}.banker-side:not(.open):after{display:none}}
@@ -54,6 +54,7 @@
       <a class="active" href="#bank-players">▦ <span>DASHBOARD / PLAYERS</span></a>
       <a class="pinklink" href="#bank-digital">💳 <span>DIGITAL BANK</span></a>
       <a href="properties.html">🏛 <span>PROPERTY CONTROL</span></a>
+      <a class="dangerlink" href="theft.html">🚨 <span>CATCH PROPERTY THIEVES</span></a>
       <a class="goldlink" href="auction.html">🔨 <span>AUCTIONS</span></a>
       <a href="#bank-rent">🏠 <span>RENT / REPOSSESSION</span></a>
       <a href="#bank-assign">🎁 <span>ISSUE / AWARD PROPERTY</span></a>
@@ -72,7 +73,7 @@
 
   const mobile=document.createElement('div');
   mobile.className='banker-mobile-head';
-  mobile.innerHTML=`<button id="bankMenuBtn">☰</button><b>♛ BANKER • ${tableCode}</b><button onclick="location.href='auction.html'">🔨</button>`;
+  mobile.innerHTML=`<button id="bankMenuBtn">☰</button><b>♛ BANKER • ${tableCode}</b><button onclick="location.href='theft.html'">🚨</button>`;
   document.body.prepend(mobile);
 
   $('#bankMenuBtn')?.addEventListener('click',()=>side.classList.toggle('open'));
