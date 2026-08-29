@@ -1,4 +1,5 @@
 (()=>{
+  const cardDataReady=window.FTCardData?Promise.resolve():new Promise(resolve=>{const s=document.createElement('script');s.src='card-data.js';s.onload=resolve;s.onerror=resolve;document.head.appendChild(s)});
   const style=document.createElement('style');
   style.textContent=`
     .dashGame{grid-column:1/-1;border:1px solid #d4af3766;background:radial-gradient(circle at 50% 35%,#2c0920 0,#090909 48%,#030303 100%);padding:18px;border-radius:16px;box-shadow:0 18px 40px #0007;overflow:hidden}
@@ -56,6 +57,7 @@
     spaces.forEach((s,i)=>{const n=String(names[i]).toUpperCase(),p=map.get(n);if(!p||!propertyNames.has(n))return;s.classList.add('propertySpace',p.is_bank_owned?'bankOwned':'playerOwned');s.innerHTML=`<span class="nm">${esc(p.property_name)}</span><span class="pm">${p.price}T • R${p.rent}</span><span class="ow">${p.is_bank_owned?'BANK':esc(p.owner_name||'PLAYER')}</span>`;s.title=`${p.property_name} • ${p.price} TABLES • Rent ${p.rent} • ${p.is_bank_owned?'Bank owned':'Owner '+(p.owner_name||'Player')}`});
   }
   async function renderPinned(){
+    await cardDataReady;
     const box=document.getElementById('dashPinned'); if(!box||typeof token==='undefined'||!token||typeof db==='undefined')return;
     const {data,error}=await db.rpc('ft_get_last_player_card',{p_player_token:token});if(error)return;const row=Array.isArray(data)?data[0]:data;if(!row||!window.FTCardData)return;const c=FTCardData.describe(row.card_type,row.card_no);box.className='dashPinned '+c.accent;box.innerHTML=`<div class="lab">${esc(c.label)} • CARD ${row.card_no}</div><h3>${c.icon} ${esc(c.title)}</h3><p>${esc(c.body)}</p><div class="tiny"><span class="alerted">🔔 BANKER ALERTED</span><span>PINNED</span></div>${c.url?`<button onclick="location.href='${c.url}'">OPEN CARD</button>`:''}`;
   }
