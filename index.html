@@ -3,24 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fortune Tables</title>
+  <meta name="theme-color" content="#050505">
+  <title>Fortune Tables — Web Edition</title>
   <link rel="stylesheet" href="style.css">
-  <style>.homepanel{width:min(520px,100%)}.session{display:none;margin-bottom:14px;padding:16px;border:1px solid #d4af37;background:#0d0903;border-radius:10px}.session strong{color:#d4af37}.choice{display:grid;grid-template-columns:1fr 1fr;gap:10px}.divider{display:flex;align-items:center;gap:10px;color:#8e7a48;font-size:11px;letter-spacing:2px;margin:18px 0}.divider:before,.divider:after{content:"";height:1px;background:#4c3c15;flex:1}.digital{margin:14px 0;padding:18px;border:1px solid #ff2d7a;background:radial-gradient(circle at 50% 0,#4c102f,#090909 60%);border-radius:12px}.digital h3{color:#d4af37;font-size:23px;margin:0 0 6px}@media(max-width:520px){.choice{grid-template-columns:1fr}}</style>
+  <style>
+    .homepanel{width:min(560px,100%)}.session{display:none;margin-bottom:14px;padding:16px;border:1px solid #d4af37;background:#0d0903;border-radius:11px;text-align:left}.session strong{color:#d4af37}.choice{display:grid;grid-template-columns:1fr 1fr;gap:10px}.join-title{display:flex;align-items:center;justify-content:center;gap:8px;color:#d4af37;font-size:12px;font-weight:900;letter-spacing:.16em}.hero-copy{max-width:620px;color:#c9bfa6;margin:8px auto 0}.mini-links{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}@media(max-width:520px){.choice,.mini-links{grid-template-columns:1fr}}
+  </style>
 </head>
 <body>
   <main class="landing">
+    <div class="web-badge">● LIVE WEB EDITION</div>
     <div class="crown">♛</div>
     <h1>FORTUNE</h1>
     <h2>TABLES</h2>
     <p class="tagline">RISK IT. PLAY IT. TAKE YOUR SEAT.</p>
+    <p class="hero-copy">A live social strategy game where the board, Bank, properties, cards, auctions, steals, debt and player balances all run online.</p>
+
     <section class="panel homepanel">
-      <div id="resumeBox" class="session"><strong>ACTIVE GAME FOUND</strong><p id="resumeText">You already have a Fortune Tables session on this device.</p><button id="resumeGame">RETURN TO GAME</button></div>
-      <div class="digital"><h3>💳 PHYSICAL MONEY IS OPTIONAL</h3><p>The Banker can run every TABLE digitally on the Fortune website, including starting balances, payments, auctions, rent, and rewards.</p></div>
+      <div id="resumeBox" class="session">
+        <div class="eyebrow"><span class="status-dot"></span> ACTIVE GAME FOUND</div>
+        <p id="resumeText">You already have a Fortune Tables session on this device.</p>
+        <button id="resumeGame">RETURN TO GAME</button>
+      </div>
+
+      <div class="notice gold">
+        <b class="gold">FULLY WEB-BASED</b><br>
+        <span class="muted">No paper banking or manual balance tracking required. One player runs the Banker dashboard while everyone else plays from their own phone.</span>
+      </div>
+
+      <div class="feature-grid">
+        <div class="feature-chip"><div>🎲</div><b>LIVE BOARD</b><span>Turns + movement</span></div>
+        <div class="feature-chip"><div>💳</div><b>DIGITAL BANK</b><span>Balances + debt</span></div>
+        <div class="feature-chip"><div>🚨</div><b>LIVE CHAOS</b><span>Steals + cards</span></div>
+      </div>
+
       <h3>ENTER THE TABLE</h3>
-      <p>One person creates the game as Banker. Everyone else joins with the table code.</p>
-      <div class="choice"><button id="createGame">♛ CREATE AS BANKER</button><button id="showJoin" class="secondary">JOIN AS PLAYER</button></div>
+      <p class="muted">One person creates the room as Banker. Everyone else joins with the table code.</p>
+      <div class="choice">
+        <button id="createGame">♛ CREATE AS BANKER</button>
+        <button id="showJoin" class="secondary">JOIN AS PLAYER</button>
+      </div>
+
       <div id="joinBox" class="hidden">
-        <div class="divider">PLAYER ENTRY</div>
+        <div class="divider"></div>
+        <div class="join-title">PLAYER ENTRY</div>
         <input id="tableCode" placeholder="TABLE CODE" maxlength="12" autocomplete="off">
         <input id="playerName" placeholder="PLAYER NAME" maxlength="40" autocomplete="name">
         <select id="symbol">
@@ -31,7 +57,11 @@
         </select>
         <button id="joinGame">TAKE YOUR SEAT</button>
       </div>
-      <button id="openBoard" class="secondary">🎲 OPEN DIGITAL BOARD</button>
+
+      <div class="mini-links">
+        <button id="openBoard" class="secondary">🎲 OPEN GAME BOARD</button>
+        <button class="secondary" onclick="location.href='rules.html'">📖 HOW TO PLAY</button>
+      </div>
       <p id="message"></p>
     </section>
     <p class="footer">FORTUNE FAVORS THE BOLD.</p>
